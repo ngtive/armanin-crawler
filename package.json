@@ -1,0 +1,19 @@
+{
+  "name": "armanin-crawler",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Crawlee crawler for the armanin.ir ISIC product list (offset pagination)",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node src/main.js"
+  },
+  "dependencies": {
+    "@crawlee/cheerio": "^3.18.2",
+    "@crawlee/core": "^3.18.2",
+    "csv-stringify": "^6.5.0",
+    "dotenv": "^16.4.5"
+  }
+}
