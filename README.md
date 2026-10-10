@@ -33,8 +33,22 @@ npm start
 
 Outputs land in `storage/exports/`:
 
-- `products.csv` — `productUrl, code, name_fa, name_en, tariff, unit, description`
+- `products.csv` — `code, name_fa, name_en, unit, description`
 - `products.json` — same data, pretty-printed
+
+## Scripts
+
+`scripts/drop-column.mjs` removes column(s) from the exported files in place
+(atomic write, handles quoted CSV fields):
+
+```bash
+node scripts/drop-column.mjs --dry tariff      # preview
+node scripts/drop-column.mjs tariff            # apply
+node scripts/drop-column.mjs tariff code       # multiple
+```
+
+Only touches `storage/exports/products.{csv,json}` — Crawlee's own
+`storage/datasets` state is left alone.
 
 ## Configuration
 
@@ -65,6 +79,7 @@ MAX_PAGES=991 FOLLOW_DETAILS=true MAX_REQUESTS=20000 MAX_CONCURRENCY=4 npm start
 - `src/config.js` — URL, offsets, selectors, CSV column order
 - `src/main.js` — crawler: list parsing, detail enrichment, offset pagination
 - `src/exporter.js` — dataset → CSV/JSON
+- `scripts/drop-column.mjs` — drop columns from the exported files
 
 ## Notes
 

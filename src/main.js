@@ -33,13 +33,13 @@ const crawler = new CheerioCrawler({
       }).text().replace(/\s+/g, ' ').trim();
       const en = $('.product h1 small').first().text().trim();
 
+      const { productUrl, tariff, ...base } = request.userData.item;
       const item = {
-        ...request.userData.item,
+        ...base,
         name_fa: fa,
         name_en: en,
         unit: labels['واحد سنجش'] ?? '',
         description: labels['شرح محصول'] ?? '',
-        tariff: labels['کد تعرفه'] || request.userData.item.tariff,
       };
 
       await Dataset.pushData([item]);
@@ -70,7 +70,7 @@ const crawler = new CheerioCrawler({
     if (config.followDetailPages) {
       await addRequests(items.map((item) => ({ url: item.productUrl, userData: { item } })));
     } else {
-      await Dataset.pushData(items);
+      await Dataset.pushData(items.map(({ productUrl, tariff, ...rest }) => rest));
     }
 
     // Offset pagination: advance by pageSize until lastOffset / maxPages.

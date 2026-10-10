@@ -25,11 +25,9 @@ export const config = {
 };
 
 export const CSV_COLUMNS = [
-  'productUrl',
   'code',
   'name_fa',
   'name_en',
-  'tariff',
   'unit',
   'description',
 ];
